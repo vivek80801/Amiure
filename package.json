@@ -1,0 +1,26 @@
+{
+  "name": "Amiure",
+  "version": "1.0.0",
+  "description": "This project is for testing of my skills.",
+  "main": "server.ts",
+  "author": "vivek80801",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./server.ts"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^6.0.2",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/passport": "^1.0.7",
+    "@types/passport-local": "^1.0.34",
+    "nodemon": "^2.0.12",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.2"
+  }
+}
