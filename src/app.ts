@@ -5,16 +5,30 @@ import { config } from "dotenv";
 import { resolve, join } from "path";
 import { router } from "./routes/index";
 import { connectDB } from "./contorllers/services/microservices/db";
+import { myPassport } from "./contorllers/services/microservices/passport";
 
 export const app = express();
 
 connectDB();
+myPassport(passport);
 
 if (process.platform === "win32") {
   config({ path: join(resolve(__dirname.replace("\\src", "\\.env"))) });
 } else {
   config({ path: join(resolve(__dirname.replace("/src", "/.env"))) });
 }
+
+app.use(
+  session({
+    secret: "my secret",
+    resave: false,
+    saveUninitialized: true,
+    cookie: {},
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 if (process.env.NODE_ENV === "development") {
   app.use((req, res, next) => {
