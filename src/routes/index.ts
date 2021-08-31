@@ -1,7 +1,6 @@
 import crypto from "crypto";
 import { Router } from "express";
-import { signUp } from "../contorllers/index";
-import { logIn } from "../contorllers/index";
+import { signUp, logIn } from "../contorllers/index";
 import { isAuth } from "../contorllers/services/microservices/auth";
 
 export const router = Router();
