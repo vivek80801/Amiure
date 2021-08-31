@@ -1,9 +1,14 @@
 import express from "express";
+import session from "express-session";
+import passport from "passport";
 import { config } from "dotenv";
 import { resolve, join } from "path";
 import { router } from "./routes/index";
+import { connectDB } from "./contorllers/services/microservices/db";
 
 export const app = express();
+
+connectDB();
 
 if (process.platform === "win32") {
   config({ path: join(resolve(__dirname.replace("\\src", "\\.env"))) });

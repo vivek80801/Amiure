@@ -1,3 +1,4 @@
+import { saveToDatabase } from "./microservices/user";
 export module User {
   export class myUser {
     username: string;
@@ -7,6 +8,9 @@ export module User {
       this.username = username;
       this.email = email;
       this.password = password;
+    }
+    save() {
+      saveToDatabase(this.username, this.email, this.password);
     }
   }
 }
