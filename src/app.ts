@@ -1,6 +1,7 @@
 import express from "express";
 import session from "express-session";
 import passport from "passport";
+import cors from "cors";
 import { config } from "dotenv";
 import { resolve, join } from "path";
 import { router } from "./routes/index";
@@ -19,6 +20,14 @@ if (process.platform === "win32") {
 }
 
 app.use(
+  cors({
+    origin: "http://localhost:3000",
+    methods: ["GET", "PUT", "POST"],
+    credentials: true,
+  })
+);
+
+app.use(
   session({
     secret: "my secret",
     resave: false,
@@ -30,14 +39,15 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-if (process.env.NODE_ENV === "development") {
-  app.use((req, res, next) => {
-    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.setHeader("Access-Control-Allow-Headers", "content-type");
-    res.setHeader("Access-Control-Allow-Methods", "POST");
-    next();
-  });
-}
+//if (process.env.NODE_ENV === "development") {
+//  app.use((req, res, next) => {
+//    res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+//    res.setHeader("Access-Control-Allow-Headers", "content-type");
+//    res.setHeader("Access-Control-Allow-Methods", "POST");
+//    res.setHeader("Access-Control-Allow-Credentials", "true");
+//    next();
+//  });
+//}
 
 app.use(express.json());
 

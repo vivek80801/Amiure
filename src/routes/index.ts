@@ -15,8 +15,8 @@ router.get("/dashboard", isAuth, (req, res) => {
 });
 
 router.get("/getUser", (req, res) => {
-  res.json({ msg: "testing" });
+  res.json({ msg: req.user });
 });
 
 router.post("/", signUp);
-router.post("/login", logIn);
+router.post("/login", logIn)
