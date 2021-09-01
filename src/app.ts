@@ -10,9 +10,6 @@ import { myPassport } from "./contorllers/services/microservices/passport";
 
 export const app = express();
 
-connectDB();
-myPassport(passport);
-
 if (process.platform === "win32") {
   config({ path: join(resolve(__dirname.replace("\\src", "\\.env"))) });
 } else {
@@ -27,15 +24,16 @@ app.use(
   })
 );
 
+connectDB();
+myPassport(passport);
+
 app.use(
   session({
-    secret: "my secret",
+    secret: "mysecret",
     resave: false,
     saveUninitialized: true,
-    cookie: {},
   })
 );
-
 app.use(passport.initialize());
 app.use(passport.session());
 

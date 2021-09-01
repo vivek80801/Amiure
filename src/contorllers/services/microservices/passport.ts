@@ -30,11 +30,9 @@ export const myPassport = (passport: passport.PassportStatic) => {
     })
   );
   passport.serializeUser((user: any, done) => {
-    console.log(`Attempting to serialize ${user.id}`);
     done(null, user.id);
   });
   passport.deserializeUser((userId, done) => {
-    console.log(`Attempting to deserialize id ${userId}`);
     UserModal.findById(userId)
       .then((user) => {
         if (!user) {
