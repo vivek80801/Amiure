@@ -48,7 +48,7 @@ export const logIn = (req: Request, res: Response, next: NextFunction) => {
       if (err) {
         return res.status(200).json(err);
       }
-      return res.redirect("/dashboard?userid=" + user.id);
+      return res.redirect("/dashboard");
     });
   })(req, res, next);
 };

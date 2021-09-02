@@ -9,16 +9,20 @@ router.get("/", (req, res) => {
   res.json({ msg: "hello from server" });
 });
 
-router.get("/dashboard", (req, res) => {
-  res.json({ msg: "dashboard" });
+router.get("/dashboard", isAuth, (req, res) => {
+  res.json({ msg: "dashboard", user: req.user });
 });
 
 router.get("/getUser/:id", getUser);
 
-router.get("/login", (req, res) => {
+router.get("/api/login", (req, res) => {
   console.log("user => " + req.user);
   res.json({ msg: "login failed" });
 });
 
-router.post("/", signUp);
-router.post("/login", logIn);
+router.get("/api/json", (req, res) => {
+  res.json({ msg: "it works" });
+});
+
+router.post("/api/signup", signUp);
+router.post("/api/login", logIn);

@@ -5,6 +5,7 @@ import cors from "cors";
 import { config } from "dotenv";
 import { resolve, join } from "path";
 import { router } from "./routes/index";
+import { BlogRouter } from "./routes/blog";
 import { connectDB } from "./contorllers/services/microservices/db";
 import { myPassport } from "./contorllers/services/microservices/passport";
 
@@ -18,11 +19,24 @@ if (process.platform === "win32") {
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
-    methods: ["GET", "PUT", "POST"],
+    origin: "*",
+    methods: "*",
     credentials: true,
   })
 );
+//const allowedOrigins = ["http://localhost:3000/login", "http://localhost:3000"];
+//
+//app.use(
+//  cors({
+//    origin: (origin, callback) => {
+//      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+//        callback(null, true);
+//      } else {
+//        callback(new Error("Not allowed by CORS"));
+//      }
+//    },
+//  })
+//);
 
 connectDB();
 myPassport(passport);
@@ -50,6 +64,7 @@ app.use(passport.session());
 app.use(express.json());
 
 app.use("/", router);
+app.use("/blog", BlogRouter);
 
 app.use((req, res) => {
   res.json({ msg: "page not found" });
