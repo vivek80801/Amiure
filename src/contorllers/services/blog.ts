@@ -10,7 +10,6 @@ export module Blog {
       this.user = user;
     }
     save() {
-      console.log("saving user");
       saveBlogToDatabase(this.title, this.discreaption, this.user);
     }
   }
