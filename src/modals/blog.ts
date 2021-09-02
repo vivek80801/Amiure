@@ -9,6 +9,14 @@ const BlogSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  discreaption: {
+    type: String,
+    required: true,
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "UserModal",
+  },
 });
 
 export const BlogModal = mongoose.model<IBlog>("blog", BlogSchema);

@@ -10,7 +10,10 @@ router.get("/", (req, res) => {
 });
 
 router.get("/dashboard", isAuth, (req, res) => {
-  res.json({ msg: "dashboard", user: req.user });
+  res.json({
+    msg: "dashboard",
+    user: req.user,
+  });
 });
 
 router.get("/getUser/:id", getUser);

@@ -1,11 +1,8 @@
-import { Router } from "express";
-import { Blog } from "../contorllers/services/blog";
+import { Request, Response } from "express";
+import { Blog } from "./services/blog";
 import { BlogModal } from "../modals/blog";
-import { isAuth } from "../contorllers/services/microservices/auth";
 
-export const BlogRouter = Router();
-
-BlogRouter.post("/createblog", isAuth, (req, res) => {
+export const createBlog = (req: Request, res: Response) => {
   const {
     title,
     discreaption,
@@ -13,9 +10,9 @@ BlogRouter.post("/createblog", isAuth, (req, res) => {
   const newBlog = new Blog.myBlog(title, discreaption, req.user);
   newBlog.save();
   res.json({ msg: "ok" });
-});
+};
 
-BlogRouter.get("/blogs", isAuth, async (req, res) => {
+export const getBlog = async (req: Request, res: Response) => {
   try {
     //@ts-ignore
     const blogs = await BlogModal.find({ user: req.user.id }).lean();
@@ -23,4 +20,4 @@ BlogRouter.get("/blogs", isAuth, async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-});
+};

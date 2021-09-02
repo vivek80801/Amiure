@@ -64,7 +64,7 @@ app.use(passport.session());
 app.use(express.json());
 
 app.use("/", router);
-app.use("/blog", BlogRouter);
+app.use("/api/blog", BlogRouter);
 
 app.use((req, res) => {
   res.json({ msg: "page not found" });
