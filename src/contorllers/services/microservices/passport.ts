@@ -10,7 +10,13 @@ export const myPassport = (passport: passport.PassportStatic) => {
       UserModal.findOne({ username: username })
         .then((user) => {
           if (!user) {
-            return done(JSON.stringify({ msg: "can not find user" }), false);
+            return done(
+              JSON.stringify({
+                msg: "can not find user",
+                user: { username: "", email: "" },
+              }),
+              false
+            );
           } else {
             const newPassword = crypto
               .createHmac("sha256", seceret)
@@ -20,7 +26,10 @@ export const myPassport = (passport: passport.PassportStatic) => {
               return done(null, user);
             } else {
               return done(
-                JSON.stringify({ msg: "password did not matched" }),
+                JSON.stringify({
+                  msg: "password did not matched",
+                  user: { username: "", email: "" },
+                }),
                 false
               );
             }
