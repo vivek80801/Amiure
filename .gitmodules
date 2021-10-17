@@ -1,0 +1,3 @@
+[submodule "Amiure-client"]
+	path = Amiure-client
+	url = https://github.com/vivek80801/Amiure-client
